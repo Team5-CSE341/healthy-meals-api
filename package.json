@@ -1,0 +1,24 @@
+{
+  "name": "healthy-meals-api",
+  "version": "1.0.0",
+  "description": "Helps busy families to get healthy meals in a budget.",
+  "homepage": "https://github.com/Team5-CSE341/healthy-meals-api#readme",
+  "bugs": {
+    "url": "https://github.com/Team5-CSE341/healthy-meals-api/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Team5-CSE341/healthy-meals-api.git"
+  },
+  "license": "ISC",
+  "author": "Team 5 CSE 341",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "mongodb": "^7.1.1"
+  }
+}
