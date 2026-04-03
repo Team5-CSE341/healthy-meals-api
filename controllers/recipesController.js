@@ -44,8 +44,8 @@ const createRecipe = async (req, res) => {
   try {
     const recipe = req.body;
 
-    if (!recipe.name) {
-      return res.status(400).json({ message: 'Name is required' });
+    if (!recipe.title) {
+      return res.status(400).json({ message: 'Title is required' });
     }
 
     const db = getDb();
@@ -68,8 +68,8 @@ const updateRecipe = async (req, res) => {
       return res.status(400).json({ message: 'Invalid recipe id' });
     }
 
-    if (!recipe.name) {
-      return res.status(400).json({ message: 'Name is required' });
+    if (!recipe.title) {
+      return res.status(400).json({ message: 'Title is required' });
     }
 
     const db = getDb();
