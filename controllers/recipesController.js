@@ -3,6 +3,7 @@ const { ObjectId } = require('mongodb');
 
 // GET all recipes
 const getAllRecipes = async (req, res) => {
+  //#swagger.tags=["Recipes"]
   try {
     const db = getDb();
     const recipes = await db.collection('recipes').find().toArray();
@@ -14,6 +15,7 @@ const getAllRecipes = async (req, res) => {
 
 // GET single recipe
 const getRecipeById = async (req, res) => {
+  //#swagger.tags=["Recipes"]
   try {
     const id = req.params.id;
 
@@ -38,6 +40,7 @@ const getRecipeById = async (req, res) => {
 
 // POST create recipe
 const createRecipe = async (req, res) => {
+  //#swagger.tags=["Recipes"]
   try {
     const recipe = req.body;
 
@@ -56,6 +59,7 @@ const createRecipe = async (req, res) => {
 
 // PUT update recipe
 const updateRecipe = async (req, res) => {
+  //#swagger.tags=["Recipes"]
   try {
     const id = req.params.id;
     const recipe = req.body;
@@ -86,6 +90,7 @@ const updateRecipe = async (req, res) => {
 
 // DELETE recipe
 const deleteRecipe = async (req, res) => {
+  //#swagger.tags=["Recipes"]
   try {
     const id = req.params.id;
 

@@ -3,6 +3,7 @@ const { ObjectId } = require('mongodb');
 
 // GET all ingredients
 const getAllIngredients = async (req, res) => {
+  //#swagger.tags=["Ingredients"]
   try {
     const db = getDb();
     const ingredients = await db.collection('ingredients').find().toArray();
@@ -14,6 +15,7 @@ const getAllIngredients = async (req, res) => {
 
 // GET single ingredient
 const getIngredientById = async (req, res) => {
+  //#swagger.tags=["Ingredients"]
   try {
     const id = req.params.id;
 
@@ -38,6 +40,7 @@ const getIngredientById = async (req, res) => {
 
 // POST create ingredient
 const createIngredient = async (req, res) => {
+  //#swagger.tags=["Ingredients"]
   try {
     const ingredient = req.body;
 
@@ -56,6 +59,7 @@ const createIngredient = async (req, res) => {
 
 // PUT update ingredient
 const updateIngredient = async (req, res) => {
+  //#swagger.tags=["Ingredients"]
   try {
     const id = req.params.id;
     const ingredient = req.body;
@@ -86,6 +90,7 @@ const updateIngredient = async (req, res) => {
 
 // DELETE ingredient
 const deleteIngredient = async (req, res) => {
+  //#swagger.tags=["Ingredients"]
   try {
     const id = req.params.id;
 
