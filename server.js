@@ -7,6 +7,19 @@ const port = process.env.PORT || 3000;
 // Middleware
 app.use(express.json());
 
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin","*");
+    res.setHeader(
+        "Acccess-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept, Z-Key" 
+    );
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    next();
+});
+// Swagger documentation
+const swaggerRoutes = require('./routes/swagger');
+app.use("/", swaggerRoutes);
+
 // Routes
 const recipeRoutes = require('./routes/recipes');
 const ingredientRoutes = require('./routes/ingredients');
