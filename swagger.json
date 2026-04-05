@@ -5,11 +5,10 @@
     "description": "Api for managing healthy meals",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
-  "basePath": "/",
+  "host": "healthy-meals-api.onrender.com",
   "schemes": [
-    "http"
-  ],
+  "https"
+],
   "paths": {
     "/": {
       "get": {
