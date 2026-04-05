@@ -1,17 +1,15 @@
-const swaggerAutogen = require("swagger-autogen");
+const swaggerAutogen = require("swagger-autogen")();
 
 const doc = {
     info: {
-        title: "Healthy Meals Api",
+        title: "healthy-meals-api.onrender.com",
         description: "Api for managing healthy meals"
     },
-    host: "healthy-meals-api.onrender.com",
-    basePath: "/",
+    host: "localhost:3000",
     schemes: ["https",]
 };
 
 const outputFile = "./swagger.json";
 const endpointsFiles = ["server.js"];
 
-//This will generate swagger.json
-swaggerAutogen(outputFile,endpointsFiles,doc);
+swaggerAutogen(outputFile, endpointsFiles, doc);
