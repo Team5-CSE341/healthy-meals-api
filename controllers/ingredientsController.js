@@ -42,7 +42,13 @@ const getIngredientById = async (req, res) => {
 const createIngredient = async (req, res) => {
   //#swagger.tags=["Ingredients"]
   try {
-    const ingredient = req.body;
+    const ingredient = {
+      name: req.body.name,
+      caloriesPer1g: req.body.caloriesPer1g,
+      proteinPer1g: req.body.proteinPer1g,
+      carbsPer1g: req.body.carbsPer1g,
+      fatPer1g: req.body.fatPer1g
+    };
 
     if (!ingredient.name) {
       return res.status(400).json({ message: 'Name is required' });
@@ -62,7 +68,13 @@ const updateIngredient = async (req, res) => {
   //#swagger.tags=["Ingredients"]
   try {
     const id = req.params.id;
-    const ingredient = req.body;
+        const ingredient = {
+      name: req.body.name,
+      caloriesPer1g: req.body.caloriesPer1g,
+      proteinPer1g: req.body.proteinPer1g,
+      carbsPer1g: req.body.carbsPer1g,
+      fatPer1g: req.body.fatPer1g
+    };
 
     if (!ObjectId.isValid(id)) {
       return res.status(400).json({ message: 'Invalid ingredient id' });
