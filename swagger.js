@@ -7,7 +7,7 @@ const doc = {
     },
     host: "healthy-meals-api.onrender.com",
     
-    schemes: ["https","http"]
+    schemes: ["https",]
 };
 
 const outputFile = "./swagger.json";
