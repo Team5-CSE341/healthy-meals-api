@@ -59,7 +59,37 @@
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
+                "title": {
+                  "example": "any"
+                },
+                "description": {
+                  "example": "any"
+                },
+                "ingredients": {
+                  "example": "any"
+                },
+                "instructions": {
+                  "example": "any"
+                },
+                "prepTime": {
+                  "example": "any"
+                },
+                "cookTime": {
+                  "example": "any"
+                },
+                "calories": {
+                  "example": "any"
+                },
+                "protein": {
+                  "example": "any"
+                },
+                "carbs": {
+                  "example": "any"
+                },
+                "fat": {
+                  "example": "any"
+                },
+                "dietTags": {
                   "example": "any"
                 }
               }
@@ -126,7 +156,37 @@
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
+                "title": {
+                  "example": "any"
+                },
+                "description": {
+                  "example": "any"
+                },
+                "ingredients": {
+                  "example": "any"
+                },
+                "instructions": {
+                  "example": "any"
+                },
+                "prepTime": {
+                  "example": "any"
+                },
+                "cookTime": {
+                  "example": "any"
+                },
+                "calories": {
+                  "example": "any"
+                },
+                "protein": {
+                  "example": "any"
+                },
+                "carbs": {
+                  "example": "any"
+                },
+                "fat": {
+                  "example": "any"
+                },
+                "dietTags": {
                   "example": "any"
                 }
               }
@@ -206,6 +266,18 @@
               "properties": {
                 "name": {
                   "example": "any"
+                },
+                "caloriesPer1g": {
+                  "example": "any"
+                },
+                "proteinPer1g": {
+                  "example": "any"
+                },
+                "carbsPer1g": {
+                  "example": "any"
+                },
+                "fatPer1g": {
+                  "example": "any"
                 }
               }
             }
@@ -272,6 +344,18 @@
               "type": "object",
               "properties": {
                 "name": {
+                  "example": "any"
+                },
+                "caloriesPer1g": {
+                  "example": "any"
+                },
+                "proteinPer1g": {
+                  "example": "any"
+                },
+                "carbsPer1g": {
+                  "example": "any"
+                },
+                "fatPer1g": {
                   "example": "any"
                 }
               }
