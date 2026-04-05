@@ -6,7 +6,7 @@ const doc = {
         description: "Api for managing healthy meals"
     },
     host: "healthy-meals-api.onrender.com",
-    
+    basePath: "/",
     schemes: ["https",]
 };
 
