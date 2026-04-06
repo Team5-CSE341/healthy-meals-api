@@ -1,0 +1,30 @@
+## GET all reviews
+GET http://localhost:3000/reviews
+
+## GET review by ID
+GET http://localhost:3000/reviews/review001
+
+## POST create review
+POST http://localhost:3000/reviews
+Content-Type: application/json
+
+{
+    "recipeId": "recipe005",
+    "userId": "user003",
+    "rating": 5,
+    "comment": "Delicious and healthy!"
+}
+
+## PUT update review
+PUT http://localhost:3000/reviews/review001
+Content-Type: application/json
+
+{
+    "recipeId": "recipe005",
+    "userId": "user003",
+    "rating": 4,
+    "comment": "Very tasty, but could use more seasoning."
+}
+
+## DELETE review
+DELETE http://localhost:3000/reviews/review001
