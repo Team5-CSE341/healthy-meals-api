@@ -1,0 +1,78 @@
+### GET all recipes
+GET http://localhost:3000/recipes   
+
+### GET recipe by ID
+GET http://localhost:3000/recipes/69d2f42bf5a3e4ec6878eee9
+
+### POST create recipe
+POST http://localhost:3000/recipes HTTP/1.1
+Content-Type: application/json
+
+{
+    "title": "Grilled Chicken Salad",
+    "description": "A healthy and delicious grilled chicken salad with fresh vegetables.",
+    "ingredients": [
+        {
+            "ingredientId": "ing006",
+            "quantity": 150,
+            "unit": "grams"
+        },
+        {
+            "ingredientId": "ing012",
+            "quantity": 100,
+            "unit": "grams"
+        }
+    ],
+    "instructions": [
+        "Season the chicken breast with salt and pepper.",
+        "Grill the chicken until fully cooked, about 6-7 minutes per side.",
+        "Let the chicken rest for a few minutes, then slice it into strips.",
+        "In a large bowl, combine mixed greens, cherry tomatoes, cucumber slices, and red onion.",
+        "Top the salad with the grilled chicken strips and your favorite dressing."
+    ],
+    "prepTime": 15,
+    "cookTime": 15,
+    "calories": 350,
+    "protein": 30,
+    "carbs": 10,
+    "fat": 15,
+    "dietTags": ["gluten-free", "low-carb"]
+}
+
+### PUT update recipe
+PUT http://localhost:3000/recipes/69d40d909ae376827003591d HTTP/1.1
+Content-Type: application/json
+
+{
+    "title": "Grilled Chicken Salad",
+    "description": "A healthy and delicious grilled chicken salad with fresh vegetables.",
+    "ingredients": [
+        {
+            "ingredientId": "ing006",
+            "quantity": 150,
+            "unit": "grams"
+        },
+        {
+            "ingredientId": "ing014",
+            "quantity": 100,
+            "unit": "grams"
+        }
+    ],
+    "instructions": [
+        "Season the chicken breast with salt and pepper.",
+        "Grill the chicken until fully cooked, about 6-7 minutes per side.",
+        "Let the chicken rest for a few minutes, then slice it into strips.",
+        "In a large bowl, combine mixed greens, cherry tomatoes, cucumber slices, and red onion.",
+        "Top the salad with the grilled chicken strips and your favorite dressing."
+    ]
+    "prepTime": 15,
+    "cookTime": 15,
+    "calories": 350,
+    "protein": 30,
+    "carbs": 10,
+    "fat": 15,
+    "dietTags": ["gluten-free", "low-carb"]
+}
+
+### DELETE recipe
+DELETE http://localhost:3000/recipes/69d40d909ae376827003591d
