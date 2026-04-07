@@ -5,7 +5,7 @@ GET http://localhost:3000/reviews
 GET http://localhost:3000/reviews/review001
 
 ## POST create review
-POST http://localhost:3000/reviews
+POST http://localhost:3000/reviews HTTP/1.1
 Content-Type: application/json
 
 {
@@ -16,7 +16,7 @@ Content-Type: application/json
 }
 
 ## PUT update review
-PUT http://localhost:3000/reviews/review001
+PUT http://localhost:3000/reviews/review001 HTTP/1.1
 Content-Type: application/json
 
 {
