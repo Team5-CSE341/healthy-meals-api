@@ -8,7 +8,6 @@
   "host": "healthy-meals-api.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http",
     "https"
   ],
   "paths": {
@@ -37,10 +36,66 @@
         "tags": [
           "Recipes"
         ],
+        "summary": "Get all recipes",
         "description": "",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "List of recipes",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "example": "any"
+                  },
+                  "title": {
+                    "type": "string",
+                    "example": "any"
+                  },
+                  "type": {
+                    "type": "string",
+                    "example": "any"
+                  },
+                  "portions": {
+                    "type": "number",
+                    "example": 0
+                  },
+                  "instructions": {
+                    "type": "string",
+                    "example": "any"
+                  },
+                  "ingredients": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "ingredient_id": {
+                          "type": "string",
+                          "example": "any"
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "any"
+                        },
+                        "quantity": {
+                          "type": "number",
+                          "example": 0
+                        },
+                        "unit": {
+                          "type": "string",
+                          "example": "any"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "500": {
             "description": "Internal Server Error"
@@ -51,46 +106,55 @@
         "tags": [
           "Recipes"
         ],
+        "summary": "Create recipe",
         "description": "",
         "parameters": [
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "title": {
+                  "type": "string",
                   "example": "any"
                 },
-                "description": {
+                "type": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "portions": {
+                  "type": "number",
+                  "example": 0
+                },
+                "instructions": {
+                  "type": "string",
                   "example": "any"
                 },
                 "ingredients": {
-                  "example": "any"
-                },
-                "instructions": {
-                  "example": "any"
-                },
-                "prepTime": {
-                  "example": "any"
-                },
-                "cookTime": {
-                  "example": "any"
-                },
-                "calories": {
-                  "example": "any"
-                },
-                "protein": {
-                  "example": "any"
-                },
-                "carbs": {
-                  "example": "any"
-                },
-                "fat": {
-                  "example": "any"
-                },
-                "dietTags": {
-                  "example": "any"
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "ingredient_id": {
+                        "type": "string",
+                        "example": "any"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "any"
+                      },
+                      "quantity": {
+                        "type": "number",
+                        "example": 0
+                      },
+                      "unit": {
+                        "type": "string",
+                        "example": "any"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -98,7 +162,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Recipe created"
           },
           "400": {
             "description": "Bad Request"
@@ -114,18 +178,72 @@
         "tags": [
           "Recipes"
         ],
+        "summary": "Get recipe by ID",
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Recipe ID"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Recipe found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "title": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "type": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "portions": {
+                  "type": "number",
+                  "example": 0
+                },
+                "instructions": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "ingredients": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "ingredient_id": {
+                        "type": "string",
+                        "example": "any"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "any"
+                      },
+                      "quantity": {
+                        "type": "number",
+                        "example": 0
+                      },
+                      "unit": {
+                        "type": "string",
+                        "example": "any"
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "400": {
             "description": "Bad Request"
@@ -142,6 +260,7 @@
         "tags": [
           "Recipes"
         ],
+        "summary": "Update recipe",
         "description": "",
         "parameters": [
           {
@@ -153,41 +272,49 @@
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "title": {
+                  "type": "string",
                   "example": "any"
                 },
-                "description": {
+                "type": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "portions": {
+                  "type": "number",
+                  "example": 0
+                },
+                "instructions": {
+                  "type": "string",
                   "example": "any"
                 },
                 "ingredients": {
-                  "example": "any"
-                },
-                "instructions": {
-                  "example": "any"
-                },
-                "prepTime": {
-                  "example": "any"
-                },
-                "cookTime": {
-                  "example": "any"
-                },
-                "calories": {
-                  "example": "any"
-                },
-                "protein": {
-                  "example": "any"
-                },
-                "carbs": {
-                  "example": "any"
-                },
-                "fat": {
-                  "example": "any"
-                },
-                "dietTags": {
-                  "example": "any"
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "ingredient_id": {
+                        "type": "string",
+                        "example": "any"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "any"
+                      },
+                      "quantity": {
+                        "type": "number",
+                        "example": 0
+                      },
+                      "unit": {
+                        "type": "string",
+                        "example": "any"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -195,7 +322,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Recipe updated"
           },
           "400": {
             "description": "Bad Request"
@@ -212,6 +339,7 @@
         "tags": [
           "Recipes"
         ],
+        "summary": "Delete recipe",
         "description": "",
         "parameters": [
           {
@@ -223,7 +351,7 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "Recipe deleted"
           },
           "400": {
             "description": "Bad Request"
@@ -242,10 +370,42 @@
         "tags": [
           "Ingredients"
         ],
+        "summary": "Get all ingredients",
         "description": "",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "List of ingredients",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "example": "any"
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "any"
+                  },
+                  "base_unit": {
+                    "type": "string",
+                    "example": "any"
+                  },
+                  "calories_per_unit": {
+                    "type": "number",
+                    "example": 0
+                  },
+                  "cost_per_unit": {
+                    "type": "number",
+                    "example": 0
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "500": {
             "description": "Internal Server Error"
@@ -256,28 +416,31 @@
         "tags": [
           "Ingredients"
         ],
+        "summary": "Create ingredient",
         "description": "",
         "parameters": [
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "name": {
+                  "type": "string",
                   "example": "any"
                 },
-                "caloriesPer1g": {
+                "base_unit": {
+                  "type": "string",
                   "example": "any"
                 },
-                "proteinPer1g": {
-                  "example": "any"
+                "calories_per_unit": {
+                  "type": "number",
+                  "example": 0
                 },
-                "carbsPer1g": {
-                  "example": "any"
-                },
-                "fatPer1g": {
-                  "example": "any"
+                "cost_per_unit": {
+                  "type": "number",
+                  "example": 0
                 }
               }
             }
@@ -285,7 +448,23 @@
         ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Ingredient created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "acknowledged": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "insertedId": {
+                  "type": "string",
+                  "example": "any"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "400": {
             "description": "Bad Request"
@@ -301,24 +480,54 @@
         "tags": [
           "Ingredients"
         ],
+        "summary": "Get ingredient by ID",
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Ingredient ID"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Ingredient found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "base_unit": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "calories_per_unit": {
+                  "type": "number",
+                  "example": 0
+                },
+                "cost_per_unit": {
+                  "type": "number",
+                  "example": 0
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Invalid ID"
           },
           "404": {
-            "description": "Not Found"
+            "description": "Ingredient not found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -329,6 +538,7 @@
         "tags": [
           "Ingredients"
         ],
+        "summary": "Update ingredient",
         "description": "",
         "parameters": [
           {
@@ -340,23 +550,25 @@
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "name": {
+                  "type": "string",
                   "example": "any"
                 },
-                "caloriesPer1g": {
+                "base_unit": {
+                  "type": "string",
                   "example": "any"
                 },
-                "proteinPer1g": {
-                  "example": "any"
+                "calories_per_unit": {
+                  "type": "number",
+                  "example": 0
                 },
-                "carbsPer1g": {
-                  "example": "any"
-                },
-                "fatPer1g": {
-                  "example": "any"
+                "cost_per_unit": {
+                  "type": "number",
+                  "example": 0
                 }
               }
             }
@@ -364,13 +576,33 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Ingredient updated",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "acknowledged": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "matchedCount": {
+                  "type": "number",
+                  "example": 0
+                },
+                "modifiedCount": {
+                  "type": "number",
+                  "example": 0
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "400": {
             "description": "Bad Request"
           },
           "404": {
-            "description": "Not Found"
+            "description": "Ingredient not found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -381,6 +613,7 @@
         "tags": [
           "Ingredients"
         ],
+        "summary": "Delete ingredient",
         "description": "",
         "parameters": [
           {
@@ -392,10 +625,492 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "Deleted successfully"
           },
           "400": {
             "description": "Bad Request"
+          },
+          "404": {
+            "description": "Ingredient not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/users/": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get all users",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "List of users",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "example": "any"
+                  },
+                  "first_name": {
+                    "type": "string",
+                    "example": "any"
+                  },
+                  "last_name": {
+                    "type": "string",
+                    "example": "any"
+                  },
+                  "age": {
+                    "type": "number",
+                    "example": 0
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "any"
+                  },
+                  "weight": {
+                    "type": "number",
+                    "example": 0
+                  },
+                  "height": {
+                    "type": "number",
+                    "example": 0
+                  },
+                  "activity_level": {
+                    "type": "string",
+                    "example": "any"
+                  },
+                  "goal": {
+                    "type": "string",
+                    "example": "any"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Create user",
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "first_name": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "last_name": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "sex": {
+                  "type": "string",
+                  "example": "man | woman"
+                },
+                "age": {
+                  "type": "number",
+                  "example": 0
+                },
+                "email": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "weight": {
+                  "type": "number",
+                  "example": 0
+                },
+                "height": {
+                  "type": "number",
+                  "example": 0
+                },
+                "activity_level": {
+                  "type": "string",
+                  "example": "sedentary | lightly active | moderately active | very active | extra active"
+                },
+                "goal": {
+                  "type": "string",
+                  "example": "lose fat | maintain weight | gain muscle"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "User successfully created"
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get user by ID",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "User ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "first_name": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "last_name": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "age": {
+                  "type": "number",
+                  "example": 0
+                },
+                "email": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "weight": {
+                  "type": "number",
+                  "example": 0
+                },
+                "height": {
+                  "type": "number",
+                  "example": 0
+                },
+                "activity_level": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "goal": {
+                  "type": "string",
+                  "example": "any"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID"
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Update user",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "first_name": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "last_name": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "age": {
+                  "type": "number",
+                  "example": 0
+                },
+                "email": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "weight": {
+                  "type": "number",
+                  "example": 0
+                },
+                "height": {
+                  "type": "number",
+                  "example": 0
+                },
+                "activity_level": {
+                  "type": "string",
+                  "example": "sedentary | lightly active | moderately active | very active | extra active"
+                },
+                "goal": {
+                  "type": "string",
+                  "example": "lose fat | maintain weight | gain muscle"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User successfully updated"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Delete user",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "User successfully deleted"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/calculations/users/{id}/calories": {
+      "get": {
+        "tags": [
+          "Calculations"
+        ],
+        "summary": "Calculate user daily calorie needs",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "User ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Calculated calories",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "User id": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "Basal metabolic rate": {
+                  "type": "number",
+                  "example": 0
+                },
+                "Activity level": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "Total daily energy expenditure": {
+                  "type": "number",
+                  "example": 0
+                },
+                "User goal": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "Daily calories needed": {
+                  "type": "number",
+                  "example": 0
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/calculations/recipes/{id}/calculate": {
+      "get": {
+        "tags": [
+          "Calculations"
+        ],
+        "summary": "Calculate calories and cost for a recipe",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Recipe ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Calculated recipe data",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "recipe_title": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "total_calories": {
+                  "type": "number",
+                  "example": 0
+                },
+                "total_cost": {
+                  "type": "number",
+                  "example": 0
+                },
+                "calories_per_portion": {
+                  "type": "number",
+                  "example": 0
+                },
+                "cost_per_portion": {
+                  "type": "number",
+                  "example": 0
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/calculations/recipes/recommended/{userId}": {
+      "get": {
+        "tags": [
+          "Calculations"
+        ],
+        "summary": "Recommend recipes based on user needs",
+        "description": "",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "User ID"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Filter by meal type (e.g., lunch, dinner)",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of recommended recipes",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "example": "any"
+                  },
+                  "type": {
+                    "type": "string",
+                    "example": "breakfast | lunch | dinner | snack"
+                  },
+                  "title": {
+                    "type": "string",
+                    "example": "any"
+                  },
+                  "Calories per portion": {
+                    "type": "number",
+                    "example": 0
+                  },
+                  "Target calories per meal": {
+                    "type": "number",
+                    "example": 0
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "404": {
             "description": "Not Found"

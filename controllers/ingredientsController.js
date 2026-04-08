@@ -3,7 +3,19 @@ const { ObjectId } = require('mongodb');
 
 // GET all ingredients
 const getAllIngredients = async (req, res) => {
-  //#swagger.tags=["Ingredients"]
+  //#swagger.tags = ['Ingredients']
+  //#swagger.summary = 'Get all ingredients'
+  /* #swagger.responses[200] = {
+      description: 'List of ingredients',
+      schema: [{
+        _id: 'any',
+        name: 'any',
+        base_unit: 'any',
+        calories_per_unit: 0,
+        cost_per_unit: 0
+      }]
+  } */
+
   try {
     const db = getDb();
     const ingredients = await db.collection('ingredients').find().toArray();
@@ -15,7 +27,22 @@ const getAllIngredients = async (req, res) => {
 
 // GET single ingredient
 const getIngredientById = async (req, res) => {
-  //#swagger.tags=["Ingredients"]
+  //#swagger.tags = ['Ingredients']
+  //#swagger.summary = 'Get ingredient by ID'
+  //#swagger.parameters['id'] = { in: 'path', description: 'Ingredient ID', required: true, type: 'string' }
+  /* #swagger.responses[200] = {
+      description: 'Ingredient found',
+      schema: {
+        _id: 'any',
+        name: 'any',
+        base_unit: 'any',
+        calories_per_unit: 0,
+        cost_per_unit: 0
+      }
+  } */
+  //#swagger.responses[400] = { description: 'Invalid ID' }
+  //#swagger.responses[404] = { description: 'Ingredient not found' }
+
   try {
     const id = req.params.id;
 
@@ -40,14 +67,33 @@ const getIngredientById = async (req, res) => {
 
 // POST create ingredient
 const createIngredient = async (req, res) => {
-  //#swagger.tags=["Ingredients"]
+  //#swagger.tags = ['Ingredients']
+  //#swagger.summary = 'Create ingredient'
+  /* #swagger.parameters['body'] = {
+      in: 'body',
+      required: true,
+      schema: {
+        name: 'any',
+        base_unit: 'any',
+        calories_per_unit: 0,
+        cost_per_unit: 0
+      }
+  } */
+  /* #swagger.responses[201] = {
+      description: 'Ingredient created',
+      schema: {
+        acknowledged: true,
+        insertedId: 'any'
+      }
+  } */
+  //#swagger.responses[400] = { description: 'Bad Request' }
+  
   try {
     const ingredient = {
       name: req.body.name,
-      caloriesPer1g: req.body.caloriesPer1g,
-      proteinPer1g: req.body.proteinPer1g,
-      carbsPer1g: req.body.carbsPer1g,
-      fatPer1g: req.body.fatPer1g
+      base_unit: req.body.base_unit,
+      calories_per_unit: Number(req.body.calories_per_unit),
+      cost_per_unit: Number(req.body.cost_per_unit)
     };
 
     if (!ingredient.name) {
@@ -65,15 +111,37 @@ const createIngredient = async (req, res) => {
 
 // PUT update ingredient
 const updateIngredient = async (req, res) => {
-  //#swagger.tags=["Ingredients"]
+  //#swagger.tags = ['Ingredients']
+  //#swagger.summary = 'Update ingredient'
+  //#swagger.parameters['id'] = { in: 'path', required: true, type: 'string' }
+  /* #swagger.parameters['body'] = {
+      in: 'body',
+      required: true,
+      schema: {
+        name: 'any',
+        base_unit: 'any',
+        calories_per_unit: 0,
+        cost_per_unit: 0
+      }
+  } */
+  /* #swagger.responses[200] = {
+      description: 'Ingredient updated',
+      schema: {
+        acknowledged: true,
+        matchedCount: 0,
+        modifiedCount: 0
+      }
+  } */
+  //#swagger.responses[404] = { description: 'Ingredient not found' }
+
   try {
     const id = req.params.id;
-        const ingredient = {
+
+    const ingredient = {
       name: req.body.name,
-      caloriesPer1g: req.body.caloriesPer1g,
-      proteinPer1g: req.body.proteinPer1g,
-      carbsPer1g: req.body.carbsPer1g,
-      fatPer1g: req.body.fatPer1g
+      base_unit: req.body.base_unit,
+      calories_per_unit: Number(req.body.calories_per_unit),
+      cost_per_unit: Number(req.body.cost_per_unit)
     };
 
     if (!ObjectId.isValid(id)) {
@@ -102,7 +170,12 @@ const updateIngredient = async (req, res) => {
 
 // DELETE ingredient
 const deleteIngredient = async (req, res) => {
-  //#swagger.tags=["Ingredients"]
+  //#swagger.tags = ['Ingredients']
+  //#swagger.summary = 'Delete ingredient'
+  //#swagger.parameters['id'] = { in: 'path', required: true, type: 'string' }
+  //#swagger.responses[204] = { description: 'Deleted successfully' }
+  //#swagger.responses[404] = { description: 'Ingredient not found' }
+
   try {
     const id = req.params.id;
 
