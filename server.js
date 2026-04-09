@@ -21,10 +21,10 @@ const swaggerRoutes = require('./routes/swagger');
 app.use("/", swaggerRoutes);
 
 // Routes
-const recipeRoutes = require('./routes/recipes');
-const ingredientRoutes = require('./routes/ingredients');
-const userRoutes = require('./routes/users');
-const calculationRoutes = require('./routes/calculations');
+const recipeRoutes = require('./routes/recipesRoutes');
+const ingredientRoutes = require('./routes/ingredientsRoutes');
+const userRoutes = require('./routes/usersRoutes');
+const calculationRoutes = require('./routes/calculationsRoutes');
 
 
 app.use('/recipes', recipeRoutes);

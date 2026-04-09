@@ -1,20 +1,18 @@
-const router = require("express").Router()
-const connectDB = require("../db/connection")
+const express = require('express');
+const router = express.Router();
 
-// Get all users
-router.get("/", async (req, res) => {
-  const db = await connectDB()
-  const users = await db.collection("users").find().toArray()
-  res.json(users)
-})
+const {
+  getAllUsers,
+  getUserById,
+  createUser,
+  updateUser,
+  deleteUser
+} = require('../controllers/usersController');
 
-// Get one user
-router.get("/:id", async (req, res) => {
-  const db = await connectDB()
-  const user = await db.collection("users").findOne({
-    _id: new require("mongodb").ObjectId(req.params.id)
-  })
-  res.json(user)
-})
+router.get('/', getAllUsers);
+router.get('/:id', getUserById);
+router.post('/', createUser);
+router.put('/:id', updateUser);
+router.delete('/:id', deleteUser);
 
-module.exports = router
+module.exports = router;

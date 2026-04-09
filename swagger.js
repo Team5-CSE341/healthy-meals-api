@@ -1,4 +1,4 @@
-const swaggerAutogen = require("swagger-autogen");
+const swaggerAutogen = require("swagger-autogen")();
 
 const doc = {
     info: {
@@ -15,5 +15,4 @@ const doc = {
 const outputFile = "./swagger.json";
 const endpointsFiles = ["server.js"];
 
-//This will generate swagger.json
-swaggerAutogen(outputFile,endpointsFiles,doc);
+swaggerAutogen(outputFile, endpointsFiles, doc);
