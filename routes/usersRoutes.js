@@ -8,11 +8,12 @@ const {
   updateUser,
   deleteUser
 } = require('../controllers/usersController');
+const validateUser= require('../middleware/usersValidator');
 
 router.get('/', getAllUsers);
 router.get('/:id', getUserById);
-router.post('/', createUser);
-router.put('/:id', updateUser);
-router.delete('/:id', deleteUser);
+router.post('/', validateUser.validationUser, validateUser.validate, createUser);
+router.put('/:id', validateUser.validationUser, validateUser.validate, updateUser);
+router.delete('/:id', validateUser.validateDeleteUser, validateUser.validate, deleteUser);
 
 module.exports = router;
