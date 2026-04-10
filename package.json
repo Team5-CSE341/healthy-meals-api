@@ -19,7 +19,8 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "dotenv": "^17.4.0",
+    "autogen": "^0.0.1",
+    "dotenv": "^17.3.1",
     "express": "^5.2.1",
     "mongodb": "^7.1.1",
     "swagger": "^0.7.5",

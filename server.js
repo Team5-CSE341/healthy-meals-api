@@ -10,7 +10,7 @@ app.use(express.json());
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin","*");
     res.setHeader(
-        "Acccess-Control-Allow-Headers",
+        "Access-Control-Allow-Headers",
         "Origin, X-Requested-With, Content-Type, Accept, Z-Key" 
     );
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
@@ -21,11 +21,16 @@ const swaggerRoutes = require('./routes/swagger');
 app.use("/", swaggerRoutes);
 
 // Routes
-const recipeRoutes = require('./routes/recipes');
-const ingredientRoutes = require('./routes/ingredients');
+const recipeRoutes = require('./routes/recipesRoutes');
+const ingredientRoutes = require('./routes/ingredientsRoutes');
+const userRoutes = require('./routes/usersRoutes');
+const calculationRoutes = require('./routes/calculationsRoutes');
+
 
 app.use('/recipes', recipeRoutes);
 app.use('/ingredients', ingredientRoutes);
+app.use('/users', userRoutes);
+app.use('/calculations', calculationRoutes);
 
 // Root route
 app.get('/', (req, res) => {
