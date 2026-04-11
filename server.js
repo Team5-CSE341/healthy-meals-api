@@ -57,11 +57,13 @@ const recipeRoutes = require('./routes/recipesRoutes');
 const ingredientRoutes = require('./routes/ingredientsRoutes');
 const userRoutes = require('./routes/usersRoutes');
 const calculationRoutes = require('./routes/calculationsRoutes');
+const reviewsRoutes = require('./routes/reviewsRoutes')
 
 app.use('/recipes', recipeRoutes);
 app.use('/ingredients', ingredientRoutes);
 app.use('/users', userRoutes);
 app.use('/calculations', calculationRoutes);
+app.use('/reviews', reviewsRoutes);
 
 // Root
 app.get('/', (req, res) => {
