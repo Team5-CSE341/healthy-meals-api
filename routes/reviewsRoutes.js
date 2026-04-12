@@ -1,24 +1,18 @@
 const router = require("express").Router()
+const controller = require("../controllers/reviewsController")
 const auth = require("../middleware/auth")
-const { createReview, getReviewsByMeal } = require("../models/reviewModel")
+const validateReview = require("../middleware/validateReview")
 
-// Get reviews for a meal
-router.get("/:mealId", async (req, res) => {
-  const reviews = await getReviewsByMeal(req.params.mealId)
-  res.json(reviews)
-})
+// GET reviews by recipe
+router.get("/:recipeId", controller.getReviewsByRecipe)
 
-// Add review (PROTECTED)
-router.post("/", auth, async (req, res) => {
-  const review = {
-    mealId: req.body.mealId,
-    user: req.user.username,
-    rating: req.body.rating,
-    comment: req.body.comment
-  }
+// CREATE review
+router.post("/", auth, validateReview, controller.createReview)
 
-  const result = await createReview(review)
-  res.status(201).json(result)
-})
+// UPDATE review
+router.put("/:id", auth, validateReview, controller.updateReview)
+
+// DELETE review
+router.delete("/:id", auth, controller.deleteReview)
 
 module.exports = router
