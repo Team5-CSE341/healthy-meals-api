@@ -11,7 +11,9 @@ async (accessToken, refreshToken, profile, done) => {
   try {
     const db = await connectDB()
 
-    let user = await db.collection("users").findOne({ githubId: profile.id })
+    let user = await db.collection("users").findOne({
+      githubId: profile.id
+    })
 
     if (!user) {
       user = {
@@ -24,6 +26,7 @@ async (accessToken, refreshToken, profile, done) => {
     }
 
     return done(null, user)
+
   } catch (err) {
     return done(err, null)
   }

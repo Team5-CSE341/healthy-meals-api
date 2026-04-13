@@ -8,11 +8,12 @@ const {
   updateIngredient,
   deleteIngredient
 } = require('../controllers/ingredientsController');
+const validate =require('../middleware/ingredientsValidator');
 
 router.get('/', getAllIngredients);
 router.get('/:id', getIngredientById);
-router.post('/', createIngredient);
-router.put('/:id', updateIngredient);
-router.delete('/:id', deleteIngredient);
+router.post('/', validate.validateIngredients,validate.validate,createIngredient);
+router.put('/:id',validate.validateIngredients,validate.validate, updateIngredient);
+router.delete('/:id', validate.validateDeleteIngredient,validate.validate,deleteIngredient);
 
 module.exports = router;
