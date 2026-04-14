@@ -28,6 +28,12 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   next();
 });
+app.use(cors({
+  methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS']
+}));
+app.use(cors({origin: '*'}));
+app.use('/', require('./routes/auth.js'));
+
 
 // ✅ SESSION (REQUIRED FOR PASSPORT)
 app.use(session({
