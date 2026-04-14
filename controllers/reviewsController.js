@@ -16,14 +16,14 @@ const getReviewsByRecipe = async (req, res) => {
   }
 }
 
-// CREATE review (🔐 protected)
+// CREATE review (protected)
 const createReview = async (req, res) => {
   try {
     const db = await connectDB()
 
     const review = {
       recipeId: req.body.recipeId,
-      user: req.user.username, // 👈 from GitHub OAuth
+      user: req.user.username, // from GitHub OAuth
       rating: req.body.rating,
       comment: req.body.comment,
       createdAt: new Date()
@@ -37,7 +37,7 @@ const createReview = async (req, res) => {
   }
 }
 
-// UPDATE review (🔐 protected)
+// UPDATE review ( protected)
 const updateReview = async (req, res) => {
   try {
     const db = await connectDB()
@@ -57,7 +57,7 @@ const updateReview = async (req, res) => {
   }
 }
 
-// DELETE review (🔐 protected)
+// DELETE review ( protected)
 const deleteReview = async (req, res) => {
   try {
     const db = await connectDB()
