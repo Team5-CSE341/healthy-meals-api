@@ -83,7 +83,7 @@ app.get('/', (req, res) => {
 // START SERVER
 // =======================
 
-if (process.env.NODE_ENV !== "test") {
+if (process.env.NODE_ENV !== 'test') {
   initDb()
     .then(() => {
       app.listen(port, () => {
@@ -92,7 +92,7 @@ if (process.env.NODE_ENV !== "test") {
     })
     .catch((err) => {
       console.error('Error initializing database:', err);
-      // ❌ DO NOT use process.exit() (breaks Jest)
+      process.exit(1); // Exit the process with failure
     });
 }
 
