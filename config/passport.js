@@ -1,6 +1,6 @@
 const passport = require("passport")
 const GitHubStrategy = require("passport-github2").Strategy
-const {getDb} = require("../db/connection")
+const {getDb, initDb} = require("../db/connection")
 
 passport.use(
   new GitHubStrategy(
@@ -12,7 +12,7 @@ passport.use(
 
     async (accessToken, refreshToken, profile, done) => {
       try {
-        const db = getDb()
+        const db = initDb()
 
         let user = await db.collection("users").findOne({
           githubId: profile.id
