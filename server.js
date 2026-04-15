@@ -3,22 +3,23 @@ const session = require('express-session');
 const passport = require('passport');
 require('dotenv').config();
 
-// ✅ Initialize DB
+// Initialize DB
 const { initDb } = require('./db/connection');
 
-// ✅ Initialize Passport config
+// Initialize Passport config
 require('./config/passport');
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 // =======================
-// 🔹 MIDDLEWARE
+//  MIDDLEWARE
 // =======================
 
 app.use(express.json());
 
 // ✅ CORS
+// CORS (allow credentials for sessions)
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -29,7 +30,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// ✅ SESSION (REQUIRED FOR PASSPORT)
+// SESSION (REQUIRED FOR PASSPORT)
 app.use(session({
   secret: process.env.SESSION_SECRET || "secret",
   resave: false,
@@ -37,11 +38,12 @@ app.use(session({
 }));
 
 // ✅ PASSPORT
+//  PASSPORT (VERY IMPORTANT)
 app.use(passport.initialize());
 app.use(passport.session());
 
 // =======================
-// 🔹 ROUTES
+//  ROUTES
 // =======================
 
 // Swagger
@@ -50,6 +52,8 @@ app.use("/", swaggerRoutes);
 
 // Auth routes
 const authRoutes = require('./routes/index');
+//  AUTH ROUTES (GitHub)
+const authRoutes = require('./routes/index'); // your login/logout routes
 app.use("/", authRoutes);
 
 // API routes
@@ -58,12 +62,16 @@ const ingredientRoutes = require('./routes/ingredientsRoutes');
 const userRoutes = require('./routes/usersRoutes');
 const calculationRoutes = require('./routes/calculationsRoutes');
 const reviewsRoutes = require('./routes/reviewsRoutes');
+const reviewsRoutes = require('./routes/reviewsRoutes')
+
+
 
 app.use('/recipes', recipeRoutes);
 app.use('/ingredients', ingredientRoutes);
 app.use('/users', userRoutes);
 app.use('/calculations', calculationRoutes);
 app.use('/reviews', reviewsRoutes);
+
 
 // Root
 app.get('/', (req, res) => {
@@ -72,6 +80,7 @@ app.get('/', (req, res) => {
 
 // =======================
 // 🔹 START SERVER (IMPORTANT FIX)
+// START SERVER
 // =======================
 
 if (process.env.NODE_ENV !== "test") {
@@ -87,5 +96,5 @@ if (process.env.NODE_ENV !== "test") {
     });
 }
 
-// ✅ EXPORT FOR TESTING
+// EXPORT FOR TESTING
 module.exports = app;
