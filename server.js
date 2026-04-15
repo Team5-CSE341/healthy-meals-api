@@ -18,6 +18,7 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
+// ✅ CORS
 // CORS (allow credentials for sessions)
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -31,11 +32,12 @@ app.use((req, res, next) => {
 
 // SESSION (REQUIRED FOR PASSPORT)
 app.use(session({
-  secret: process.env.SESSION_SECRET,
+  secret: process.env.SESSION_SECRET || "secret",
   resave: false,
   saveUninitialized: false
 }));
 
+// ✅ PASSPORT
 //  PASSPORT (VERY IMPORTANT)
 app.use(passport.initialize());
 app.use(passport.session());
@@ -48,6 +50,8 @@ app.use(passport.session());
 const swaggerRoutes = require('./routes/swagger');
 app.use("/", swaggerRoutes);
 
+// Auth routes
+const authRoutes = require('./routes/index');
 //  AUTH ROUTES (GitHub)
 const authRoutes = require('./routes/index'); // your login/logout routes
 app.use("/", authRoutes);
@@ -57,6 +61,7 @@ const recipeRoutes = require('./routes/recipesRoutes');
 const ingredientRoutes = require('./routes/ingredientsRoutes');
 const userRoutes = require('./routes/usersRoutes');
 const calculationRoutes = require('./routes/calculationsRoutes');
+const reviewsRoutes = require('./routes/reviewsRoutes');
 const reviewsRoutes = require('./routes/reviewsRoutes')
 
 
@@ -74,19 +79,22 @@ app.get('/', (req, res) => {
 });
 
 // =======================
+// 🔹 START SERVER (IMPORTANT FIX)
 // START SERVER
 // =======================
 
-initDb()
-  .then(() => {
-    app.listen(port, () => {
-      console.log(`Server running on http://localhost:${port}`);
+if (process.env.NODE_ENV !== "test") {
+  initDb()
+    .then(() => {
+      app.listen(port, () => {
+        console.log(`Server running on http://localhost:${port}`);
+      });
+    })
+    .catch((err) => {
+      console.error('Error initializing database:', err);
+      // ❌ DO NOT use process.exit() (breaks Jest)
     });
-  })
-  .catch((err) => {
-    console.error('Error initializing database:', err);
-    process.exit(1);
-  });
+}
 
 // EXPORT FOR TESTING
 module.exports = app;
