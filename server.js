@@ -18,7 +18,7 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
-// ✅ CORS (allow credentials for sessions)
+// ✅ CORS
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -31,12 +31,12 @@ app.use((req, res, next) => {
 
 // ✅ SESSION (REQUIRED FOR PASSPORT)
 app.use(session({
-  secret: process.env.SESSION_SECRET,
+  secret: process.env.SESSION_SECRET || "secret",
   resave: false,
   saveUninitialized: false
 }));
 
-// ✅ PASSPORT (VERY IMPORTANT)
+// ✅ PASSPORT
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -48,8 +48,8 @@ app.use(passport.session());
 const swaggerRoutes = require('./routes/swagger');
 app.use("/", swaggerRoutes);
 
-// ✅ AUTH ROUTES (GitHub)
-const authRoutes = require('./routes/index'); // your login/logout routes
+// Auth routes
+const authRoutes = require('./routes/index');
 app.use("/", authRoutes);
 
 // API routes
@@ -57,16 +57,13 @@ const recipeRoutes = require('./routes/recipesRoutes');
 const ingredientRoutes = require('./routes/ingredientsRoutes');
 const userRoutes = require('./routes/usersRoutes');
 const calculationRoutes = require('./routes/calculationsRoutes');
-const reviewsRoutes = require('./routes/reviewsRoutes')
-/* const reviewRoutes = require('./routes/reviewsRoutes'); */
-
+const reviewsRoutes = require('./routes/reviewsRoutes');
 
 app.use('/recipes', recipeRoutes);
 app.use('/ingredients', ingredientRoutes);
 app.use('/users', userRoutes);
 app.use('/calculations', calculationRoutes);
 app.use('/reviews', reviewsRoutes);
-/* app.use('/reviews', reviewRoutes); */
 
 // Root
 app.get('/', (req, res) => {
@@ -74,19 +71,21 @@ app.get('/', (req, res) => {
 });
 
 // =======================
-// 🔹 START SERVER
+// 🔹 START SERVER (IMPORTANT FIX)
 // =======================
 
-initDb()
-  .then(() => {
-    app.listen(port, () => {
-      console.log(`Server running on http://localhost:${port}`);
+if (process.env.NODE_ENV !== "test") {
+  initDb()
+    .then(() => {
+      app.listen(port, () => {
+        console.log(`Server running on http://localhost:${port}`);
+      });
+    })
+    .catch((err) => {
+      console.error('Error initializing database:', err);
+      // ❌ DO NOT use process.exit() (breaks Jest)
     });
-  })
-  .catch((err) => {
-    console.error('Error initializing database:', err);
-    process.exit(1);
-  });
+}
 
 // ✅ EXPORT FOR TESTING
 module.exports = app;
