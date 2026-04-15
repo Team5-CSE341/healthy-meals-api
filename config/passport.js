@@ -12,7 +12,7 @@ passport.use(
 
     async (accessToken, refreshToken, profile, done) => {
       try {
-        const db = initDb()
+        const db = getDb()
 
         let user = await db.collection("users").findOne({
           githubId: profile.id
