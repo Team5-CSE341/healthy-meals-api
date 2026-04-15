@@ -50,8 +50,7 @@ app.use(passport.session());
 const swaggerRoutes = require('./routes/swagger');
 app.use("/", swaggerRoutes);
 
-// Auth routes
-const authRoutes = require('./routes/index');
+
 //  AUTH ROUTES (GitHub)
 const authRoutes = require('./routes/index'); // your login/logout routes
 app.use("/", authRoutes);
@@ -62,7 +61,6 @@ const ingredientRoutes = require('./routes/ingredientsRoutes');
 const userRoutes = require('./routes/usersRoutes');
 const calculationRoutes = require('./routes/calculationsRoutes');
 const reviewsRoutes = require('./routes/reviewsRoutes');
-const reviewsRoutes = require('./routes/reviewsRoutes')
 
 
 
