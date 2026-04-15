@@ -1,0 +1,16 @@
+### GET User Calories (TDEE)
+GET http://localhost:3000/calculations/users/69d5a639d8980a13ed513adc/calories HTTP/1.1
+Content-Type: application/json
+
+### GET Recipe Nutrition and Cost
+GET http://localhost:3000/calculations/recipes/69d2f42bf5a3e4ec6878eeec/calculate HTTP/1.1
+Content-Type: application/json
+
+### GET Recommended Recipes (No filter)
+GET http://localhost:3000/calculations/recipes/recommended/69d5a639d8980a13ed513adc HTTP/1.1
+Content-Type: application/json
+
+### GET Recommended Recipes (Filtered by meal type)
+### You can change "lunch" to "breakfast", "dinner", or "snack"
+GET http://localhost:3000/calculations/recipes/recommended/69d5a639d8980a13ed513adc?type=dinner HTTP/1.1
+Content-Type: application/json

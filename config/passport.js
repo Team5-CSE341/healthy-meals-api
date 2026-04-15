@@ -1,6 +1,6 @@
-const passport = require("passport")
-const GitHubStrategy = require("passport-github2").Strategy
-const {getDb, initDb} = require("../db/connection")
+const passport = require("passport");
+const GitHubStrategy = require("passport-github2").Strategy;
+const { getDb } = require("../db/connection");
 
 passport.use(
   new GitHubStrategy(
@@ -9,44 +9,31 @@ passport.use(
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
       callbackURL: process.env.GITHUB_CALLBACK_URL
     },
-
     async (accessToken, refreshToken, profile, done) => {
       try {
-        const db = getDb()
+        const db = getDb();
 
         let user = await db.collection("users").findOne({
           githubId: profile.id
-        })
+        });
 
         if (!user) {
-          const result = await db.collection("users").insertOne({
+          user = {
             githubId: profile.id,
             username: profile.username,
             displayName: profile.displayName
-          });
+          };
 
-          user = await db.collection("users").findOne({
-            _id: result.insertedId
-          });
+          await db.collection("users").insertOne(user);
         }
 
-        return done(null, user._id.toString())
-
+        return done(null, user);
       } catch (err) {
-        return done(err, null)
+        return done(err, null);
       }
     }
   )
 );
 
-passport.serializeUser((userId, done) => done(null, userId))
-passport.deserializeUser(async (userId, done) => {
-  try {
-    const { ObjectId } = require("mongodb");
-    const db = getDb();
-    const user = await db.collection("users").findOne({ _id: new ObjectId(userId) });
-    done(null, user);
-  } catch (err) {
-    done(err);
-  }
-});
+passport.serializeUser((user, done) => done(null, user));
+passport.deserializeUser((user, done) => done(null, user));

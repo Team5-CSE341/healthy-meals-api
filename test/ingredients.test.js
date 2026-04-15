@@ -4,7 +4,7 @@ const { initDb } = require("../db/connection");
 
 require("dotenv").config();
 
-describe("Recipes API Endpoints", () => {
+describe("Ingredients API Endpoints", () => {
   const fakeValidId = "65f0a1b2c3d4e5f67890abcd";
 
   beforeAll(async () => {
@@ -16,30 +16,30 @@ describe("Recipes API Endpoints", () => {
     }
   });
 
-  describe("GET /recipes", () => {
-    it("should return all recipes", async () => {
-      const res = await request(app).get("/recipes");
+  describe("GET /ingredients", () => {
+    it("should return all ingredients", async () => {
+      const res = await request(app).get("/ingredients");
       expect(res.statusCode).toBe(200);
     });
   });
 
-  describe("GET /recipes/:id", () => {
-    it("should return a single recipe or 404", async () => {
-      const res = await request(app).get(`/recipes/${fakeValidId}`);
+  describe("GET /ingredients/:id", () => {
+    it("should return an ingredient or 404", async () => {
+      const res = await request(app).get(`/ingredients/${fakeValidId}`);
       expect([200, 404]).toContain(res.statusCode);
     });
   });
 
-  describe("GET /recipes - response type", () => {
+  describe("GET /ingredients - response type", () => {
     it("should return JSON", async () => {
-      const res = await request(app).get("/recipes");
+      const res = await request(app).get("/ingredients");
       expect(res.headers["content-type"]).toMatch(/json/);
     });
   });
 
-  describe("GET /recipes - data structure", () => {
+  describe("GET /ingredients - structure", () => {
     it("should return an array", async () => {
-      const res = await request(app).get("/recipes");
+      const res = await request(app).get("/ingredients");
       expect(Array.isArray(res.body)).toBe(true);
     });
   });
