@@ -77,16 +77,18 @@ app.get('/', (req, res) => {
 // START SERVER
 // =======================
 
-initDb()
-  .then(() => {
-    app.listen(port, () => {
-      console.log(`Server running on http://localhost:${port}`);
+if (process.env.NODE_ENV !== 'test') {
+  initDb()
+    .then(() => {
+      app.listen(port, () => {
+        console.log(`Server running on http://localhost:${port}`);
+      });
+    })
+    .catch((err) => {
+      console.error('Error initializing database:', err);
+      process.exit(1); // Exit the process with failure
     });
-  })
-  .catch((err) => {
-    console.error('Error initializing database:', err);
-    process.exit(1);
-  });
+}
 
 // EXPORT FOR TESTING
 module.exports = app;
